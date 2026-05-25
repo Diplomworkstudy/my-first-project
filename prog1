@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL,"Rus");
+    double a, b, c;
+    
+    cout << " vvedite dlyni storon treygolnika  (a, b, c): ";
+    cin >> a >> b >> c;
+    
+    if (a + b <= c || a + c <= b || b + c <= a) {
+        cout << "treygolnik s takimi storonami ne syshestvyet!" << endl;
+        return 0;
+    }
+    
+    bool isRight = false;
+    if (abs(a*a + b*b - c*c) < 1e-6 || 
+        abs(a*a + c*c - b*b) < 1e-6 ||
+        abs(b*b + c*c - a*a) < 1e-6) {
+        isRight = true;
+    }
+    
+    if (isRight) {
+        cout << "treygolnik yavlaetsya pryamoygolnim" << endl;
+    } else {
+        double cosC = (a*a + b*b - c*c) / (2*a*b);
+        double angleC = acos(cosC) * 180 / M_PI;  
+        
+        cout << "treygolnik ne yavlyaetsya pryamoygolnim" << endl;
+        cout << "velichina ygla c:  " << angleC << " gradysov" << endl;
+    }
+    
+    return 0;
+}
